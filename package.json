@@ -1,0 +1,28 @@
+{
+  "name": "payrollerbackend",
+  "version": "1.0.0",
+  "description": "backend for a payroll calculator using sales app for different employees",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milanPhone/PayRollCalculatorBackend.git"
+  },
+  "keywords": [
+    "Payroll",
+    "sales",
+    "Backend",
+    "salesForce"
+  ],
+  "author": "milandeep singh bhalla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/milanPhone/PayRollCalculatorBackend/issues"
+  },
+  "homepage": "https://github.com/milanPhone/PayRollCalculatorBackend#readme",
+  "dependencies": {
+    "mongoose": "^6.6.3"
+  }
+}
