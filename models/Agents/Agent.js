@@ -1,16 +1,28 @@
 const mongoose = require('mongoose');
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // const getDb = require('../conection').getDb;
 
-const Agent = new Schema({
-
-    name: {
-        type: 'string',
+const agentSchema = new Schema({
+    email: {
+        type: String,
         required: true
     },
-    role: {                 //Saleried || Commision || admin
-        type: 'string',
+    name: {
+        type: String,
+        required: true
+    },
+    role: {                 //Saleried || Commision 
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
         required: true
     }
 })
+
+
+module.exports = mongoose.model('Agent',agentSchema);
+// after user fills up this form a mail will be sent to admin where he can aproove the details
+// after admin aprooves the details depending on the details furthe steps will open 

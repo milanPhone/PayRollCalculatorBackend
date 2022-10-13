@@ -4,8 +4,9 @@ let db = null;
 
 const myConnect = (cb)=>{
     
-    mongoose.connect('mongodb+srv://milan:'+password+'@cluster0.hgtna.mongodb.net/myDb?retryWrites=true&w=majority')
+    mongoose.connect('mongodb+srv://milan:'+password+'@cluster0.hgtna.mongodb.net/payroller?retryWrites=true&w=majority')
     .then(res=>{
+        console.log('connections-----')
         db = res.connections[0].db;
         // console.log('db = ',db)
         cb();

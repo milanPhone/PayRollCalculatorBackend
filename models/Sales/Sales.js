@@ -58,7 +58,27 @@ const Sales = new Schema({
         type: String
     },
     Customer_Paid: {
-        
+        type: String
+    },
+    Carrier_Paid:{
+        type: String
+    },
+    payment_received:{
+        type: String
+    },
+    payment_received_date:{
+        type: String
+    },
+    carrier_phone_number:{
+        type: String
+    },
+    Carrier_MC:{
+        type: String
+    },
+    driver_details:{
+        type: String
+    },
+    driver_details: {
+        type: String
     }
-
 })

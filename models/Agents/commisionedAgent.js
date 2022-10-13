@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 
 const commisionedAgent = new Schema({
+    agentId:{
+        type: Schema.Types.ObjectId,
+        ref: 'Agent'
+    },
     commissionPercentage: {
         type: 'number'
     },
