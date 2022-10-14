@@ -11,7 +11,8 @@ const SalariedAgentSchema = new Schema({
         required: true
     },
     attendance: {
-        type: Number
+        type: Number,
+        default: 0
     },
     totalSalary: {
         type: Number

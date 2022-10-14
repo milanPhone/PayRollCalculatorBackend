@@ -1,5 +1,6 @@
 const Agent = require('../models/Agents/Agent');
 const SalariedAgent = require('../models/Agents/SalariedAgent')
+const CommisionedAgent = require('../models/Agents/commissionedAgent');
 const errors = require('../util/errors');
 const errorHanlingFunction = require('../util/errorHandlingFunction');
 const bcrypt = require("bcrypt");
@@ -9,10 +10,12 @@ const agentController = {
     async addAgent(req,res,next){
         try{
 
-            let agentExist = Agent.findOne({email: req.body.email})
+            let agentExist = await Agent.findOne({email: req.body.email})
+            console.log('ae----',agentExist)
             if(agentExist){
                 let error = new Error();
                 error.message = errors.sameMailError;
+                throw error;
             }
             const agentData = {
                 email: req.body.email,
@@ -47,11 +50,28 @@ const agentController = {
                 }
             }
             else if(req.body.role=='commisioned'){
+                const commisionedAgentData = {
+                    agentId: savedAgent.agentId,
+                    commissionPercentage: req.body.commissionPercentage
+                }
+                var newCommissionedAgent = new CommisionedAgent(commisionedAgentData)
+                var savedCommissionedAgent = await newCommissionedAgent.save()
+                savedCommissionedAgent = savedCommissionedAgent._doc;
+                delete savedCommissionedAgent._id;
+                delete savedCommissionedAgent.__v;
+                var result = {
+                    message: 'agent added successfully',
+                    agentData: {
+                        ...savedAgent,
+                        ...savedCommissionedAgent
+                    }
+                }
     
             }
             res.status(201).json(result);
         }
         catch(err){
+            console.log('err---',err)
             errorHanlingFunction(err,res);
         }
         

@@ -2,19 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const commisionedAgent = new Schema({
+const commissionedAgentSchema = new Schema({
     agentId:{
         type: Schema.Types.ObjectId,
         ref: 'Agent'
     },
     commissionPercentage: {
-        type: 'number'
+        type: 'number',
+        required: true
     },
     totalSalary: {
         type: 'number'
     }
 
 })
-commisionedAgent.methods.setTotalSalary = (factor)=>{
+commissionedAgentSchema.methods.setTotalSalary = (factor)=>{
     //setting totalSalary logic
 } 
+
+module.exports = mongoose.model('CommissionedAgent',commissionedAgentSchema)
