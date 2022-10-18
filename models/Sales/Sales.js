@@ -1,84 +1,115 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Sales = new Schema({
+const salesSchema = new Schema({
     Load_Date: {
-        type: String
+        type: String,
+        default: "-"
     },
     Load_Number: {
-        type: Number
+        type: Number,
+        default: -1
     },
     Agent_id: {
         type: Schema.Types.ObjectId,
         ref: 'Agent'
     },
+    Agent_Email: {
+        type: String,
+        default: "-"
+    },
     Customer: {
-        type: String
+        type: String,
+        default: "-"
     },
     Carrier_Price: {
-        type: Number
+        type: Number,
+        default: -1
     },
     Margin: {
-        type: Number
+        type: Number,
+        default: -1
     },
     Pick_Up_Date: {
-        type: String
+        type: String,
+        default: "-"
     },
     drop_Of_Date: {
-        type: String
+        type: String,
+        default: "-"
     },
     Month: {
-        type: String
+        type: String,
+        default: "-"
     },
     Pick_up_location: {
-        type: String
+        type: String,
+        default: "-"
     },
     Drop_Location: {
-        type: String
+        type: String,
+        default: "-"
     },
     Carrier_email: {
-        type: String
+        type: String,
+        default: "-"
     },
     Load_Status: {
-        type: String
+        type: String,
+        default: "-"
     },
     POD_Sent: {
-        type: String
+        type: String,
+        default: "-"
     },
     POD_Sent_Date: {
-        type: String
+        type: String,
+        default: "-"
     },
     Invoicing_Status: {
-        type: String
+        type: String,
+        default: "-"
     },
     Shipper_Conformation: {
-        type: String
+        type: String,
+        default: "-"
     },
     shipper_Uploaded: {
-        type: String
+        type: String,
+        default: "-"
     },
     Customer_Paid: {
-        type: String
+        type: String,
+        default: "-"
     },
     Carrier_Paid:{
-        type: String
+        type: String,
+        default: "-"
     },
     payment_received:{
-        type: String
+        type: String,
+        default: "-"
     },
     payment_received_date:{
-        type: String
+        type: String,
+        default: "-"
     },
     carrier_phone_number:{
-        type: String
+        type: String,
+        default: "-"
     },
     Carrier_MC:{
-        type: String
+        type: String,
+        default: "-"
     },
     driver_details:{
-        type: String
+        type: String,
+        default: "-"
     },
     driver_details: {
-        type: String
+        type: String,
+        default: "-"
     }
 })
+
+module.exports = mongoose.model('Sales',salesSchema)

@@ -10,7 +10,8 @@ const app = express();
 const server = http.createServer(app);
 
 const agentRoutes = require('./routes/agentRoutes')
-
+const salesRoutes = require('./routes/salesRoutes')
+const cors = require('cors');
 
 myConnect(()=>{
     server.listen(5000,()=>{
@@ -21,6 +22,9 @@ myConnect(()=>{
 
 
 app.set('view engine','ejs');
+app.use(cors());
 app.use(bodyParser.json());
 
+
 app.use('/api/agent',agentRoutes)
+app.use('/api/sales',salesRoutes)

@@ -1,5 +1,6 @@
 const errors = {
-    sameMailError : 'User with that mail already present'
+    sameMailError : 'Agent with that mail already present',
+    AgentNotFound: 'No Agent with that email'
 }
 
 

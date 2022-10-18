@@ -83,6 +83,9 @@ const agentController = {
       console.log('req----',req)  
       let agent = await Agent.findOne({email: req.body.email})
       console.log('agent----',agent) 
+    },
+    async getEmailsAndIds(req,res,next){
+        
     }
 }
 
