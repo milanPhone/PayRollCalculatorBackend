@@ -6,7 +6,7 @@ const userAuth = (req,res,next)=>{
     let decodedToken = null;
     const token = req.get('Authorization').split(' ')[1];
     try {
-        if(req.get('Authorization')){
+        if(!req.get('Authorization')){
             decodedToken = jwt.verify(token,'meraSecret')
         }
         else{
@@ -14,22 +14,20 @@ const userAuth = (req,res,next)=>{
             error.message = 'no authorization token send'
             throw error;
         }
+        if(!decodedToken){
+            console.log('invalid token')
+            const error = new Error();
+            error.message = 'invalid Token'
+            throw error;
+        }
+        req.Agent_id = decodedToken.user_id;
+        req.email = decodedToken.user_email;
+        next();
         
     }
     catch(err){
         //err.statusCode(500);
         errorHandlingFunction(err,res);
-    }
-    if(!decodedToken){
-        console.log('invalid token')
-        const error = new Error('invalid Token');
-        error.statusCode = 500;
-        errorHandlingFunction(error,res);
-    }
-    else{
-        req.user_id = decodedToken.user_id;
-        req.user_email = decodedToken.user_email;
-        next();
     }
     
 }

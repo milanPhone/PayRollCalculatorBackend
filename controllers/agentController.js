@@ -4,9 +4,48 @@ const CommisionedAgent = require('../models/Agents/commissionedAgent');
 const errors = require('../util/errors');
 const errorHanlingFunction = require('../util/errorHandlingFunction');
 const bcrypt = require("bcrypt");
+const messages = require('../util/messages');
+const jwt = require('jsonwebtoken');
 
 const agentController = {
 
+    async loginAgent(req,res,next) {
+        try{
+            let agent = await Agent.findOne({email: req.body.email})
+            console.log('agent----',agent)
+            if(!agent){
+                let newError = new Error();
+                newError.message = errors.AgentNotFound;
+                throw newError;
+            }
+            let passwordCheck = await bcrypt.compare(req.body.password,agent.password)
+            if(!passwordCheck){
+                let newError = new Error();
+                newError.message = errors.passwordNotMatched
+                throw newError;
+            }
+            const token = jwt.sign(
+                {
+                  user_id: agent._id.toString(),
+                  user_email: agent.email,
+                },
+                "meraSecret",
+                { expiresIn: "10h" }
+            );
+            res.status(201).json({
+                messages: messages.loggedIn,
+                agent_id: agent._id.toString(),
+                authToken: token
+            })
+
+
+        }
+        catch(err){
+            console.log(err);
+            errorHanlingFunction(err,res);
+        }
+         
+      },
     async addAgent(req,res,next){
         try{
 
@@ -75,18 +114,10 @@ const agentController = {
             errorHanlingFunction(err,res);
         }
         
-    },
-
-
-    async loginAgent(req,res,next) {
-
-      console.log('req----',req)  
-      let agent = await Agent.findOne({email: req.body.email})
-      console.log('agent----',agent) 
-    },
-    async getEmailsAndIds(req,res,next){
-        
     }
+
+
+  
 }
 
 module.exports = agentController
