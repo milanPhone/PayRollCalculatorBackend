@@ -30,7 +30,7 @@ const agentController = {
                   user_email: agent.email,
                 },
                 "meraSecret",
-                { expiresIn: "10h" }
+                { expiresIn: "12h" }
             );
             res.status(201).json({
                 messages: messages.loggedIn,

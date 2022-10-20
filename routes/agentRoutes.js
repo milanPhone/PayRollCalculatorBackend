@@ -5,7 +5,7 @@ const agentController = require('../controllers/agentController')
 
 
 Router.post('/add-agent',agentController.addAgent);
-Router.get('/login',agentController.loginAgent);
+Router.post('/login',agentController.loginAgent);
 
 
 
