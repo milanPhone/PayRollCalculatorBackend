@@ -35,6 +35,7 @@ const agentController = {
             res.status(201).json({
                 messages: messages.loggedIn,
                 agent_id: agent._id.toString(),
+                name: agent.name,
                 authToken: token
             })
 
@@ -48,7 +49,21 @@ const agentController = {
       },
     async addAgent(req,res,next){
         try{
-
+            console.log('auth id-----',req.user_id);
+            let adderAgent = await Agent.findById(req.user_id);
+            console.log('adderAgent----',adderAgent._doc)
+            if(!adderAgent){
+                let error = new Error();
+                error.message = errors.authenticationError;
+                error.statusCode = 401;
+                throw error;
+            }
+            else if(adderAgent.role!='admin'){
+                let error = new Error();
+                error.message = errors.authenticationError;
+                error.statusCode = 401;
+                throw error;
+            }
             let agentExist = await Agent.findOne({email: req.body.email})
             console.log('ae----',agentExist)
             if(agentExist){
